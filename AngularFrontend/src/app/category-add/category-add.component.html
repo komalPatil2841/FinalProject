@@ -1,0 +1,23 @@
+<mat-card>
+    <form #categoryForm="ngForm" [formGroup] = "addcategoryForm" (ngSubmit)="save(categoryForm.value)">
+        <mat-toolbar>
+            <span>Add Category</span>
+        </mat-toolbar>
+        <mat-card-content>
+            <div>
+                <input type="hidden" name="categoryId" [(ngModel)]="Category.catId">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Category Name" [(ngModel)]="Category.catName" formControlName="categoryName" required name="categoryName" >
+                </mat-form-field>
+               
+            </div>
+        </mat-card-content>
+        <mat-card-actions style="margin-left: 5%;">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!categoryForm.form.valid">Save
+            </button>
+            <button mat-raised-button color="secondary" (click)="remove()" *ngIf="Category.catId" type="button">Delete
+            </button>
+            <!-- <a mat-button routerLink="/login" color="warm" >Login</a> -->
+        </mat-card-actions>
+    </form>
+</mat-card>
