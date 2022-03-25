@@ -1,0 +1,46 @@
+
+
+      <form #employeeForm="ngForm" [formGroup]="addProductForm" >
+  
+                <mat-card>
+                    <mat-card-content>
+                        <input type="hidden" name="ProductId" [(ngModel)]="product.ProductId" formControlName="ProductId">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Product Name"  [(ngModel)]="product.ProductName" formControlName="ProductName"  required name="ProductName">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Product Category</mat-label>
+                            <mat-select formControlName="CategoryId" [(ngModel)]="product.CategoryId" >
+                                <mat-option label="--Select Category --"></mat-option>
+                                <mat-option *ngFor="let category of categoryList" [value]="category.catId">
+                                {{category.catName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Product Description"  [(ngModel)]="product.Description" formControlName="Description"  required name="Description">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Available Quantity"  [(ngModel)]="product.AvailableQuantity" formControlName="AvailableQuantity" pattern="^[1-9]+$" required name="AvailableQuantity">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Product Price" [(ngModel)]="product.ProductPrice"  formControlName="ProductPrice" >
+                        </mat-form-field> 
+                        
+                        <div class="example-full-width">
+                            <mat-label>Product Image: </mat-label>
+                            <input type="file" (change)="onFileChanged($event)" class="form-control" />
+                        </div>
+                        <div *ngIf="upload" class="alert alert-success example-full-width" style="color: blue;" role="alert">
+                            Image is uploaded successfully!
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+          <div>
+            <button mat-raised-button  color="accent" [disabled]="!addProductForm.valid" color="accent" (click)="SaveProductDetails()" >Save Product</button>
+            <button mat-raised-button color="warn" *ngIf="!product.ProductId" (click)="addProductForm.reset()">Reset</button>
+            <button mat-raised-button color="warn" routerLink='/product-list'  >Cancel</button>
+          </div>
+        
+        
+    </form>
